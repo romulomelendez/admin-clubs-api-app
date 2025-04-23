@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { FormValidationService } from '../../shared/validation/form-validation.service'
 import { ApiRequestService } from '../../shared/http/api-request.service'
+import { LocalStorageTokenService } from '../../shared/auth/local-storage-token.service';
 
 @Component({
   selector: 'app-login-tab',
@@ -25,16 +26,17 @@ export class LoginTabComponent {
 
   validateService = inject(FormValidationService)
   apiService = inject(ApiRequestService)
+  localStorageService = inject(LocalStorageTokenService)
 
-  handleLogin = () => {
+  handleLogin = async () => {
     
     if(!this.validateService.isValid(this.loginForm))
       return
 
-    const username = this.loginForm.get('username')?.value
-    const password = this.loginForm.get('password')?.value
+    const username = this.loginForm.get('username')?.value ?? ''
+    const password = this.loginForm.get('password')?.value ?? ''
 
-    this.apiService.call(
+    const token = await this.apiService.call(
       "/login",
       "POST",
       {
@@ -42,5 +44,7 @@ export class LoginTabComponent {
         password
       }
     )
+
+    this.localStorageService.setToken(token)
   }
 }
