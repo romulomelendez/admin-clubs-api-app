@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
-import { FormType } from "./login-tab.types"
+import { FormValidationService } from '../../shared/validation/form-validation.service'
 
 @Component({
   selector: 'app-login-tab',
@@ -22,11 +22,11 @@ export class LoginTabComponent {
     ])
   })
 
-  validateForm = (form: FormType): boolean => form.valid
+  validateService = inject(FormValidationService)
 
   handleLogin = () => {
     
-    if(!this.validateForm(this.loginForm))
+    if(!this.validateService.isValid(this.loginForm))
       return
 
     console.log(this.loginForm.valid)
