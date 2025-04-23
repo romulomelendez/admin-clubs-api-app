@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { FormValidationService } from '../../shared/validation/form-validation.service'
+import { ApiRequestService } from '../../shared/http/api-request.service'
 
 @Component({
   selector: 'app-login-tab',
@@ -23,12 +24,23 @@ export class LoginTabComponent {
   })
 
   validateService = inject(FormValidationService)
+  apiService = inject(ApiRequestService)
 
   handleLogin = () => {
     
     if(!this.validateService.isValid(this.loginForm))
       return
 
-    console.log(this.loginForm.valid)
+    const username = this.loginForm.get('username')?.value
+    const password = this.loginForm.get('password')?.value
+
+    this.apiService.call(
+      "/login",
+      "POST",
+      {
+        username,
+        password
+      }
+    )
   }
 }
