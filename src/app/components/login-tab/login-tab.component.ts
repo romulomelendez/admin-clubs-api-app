@@ -51,7 +51,7 @@ export class LoginTabComponent {
     )
 
     this.localStorageService.setToken(token)
-    this.router.navigate(['admin'])
+    this.router.navigate(['admin/dashboard'])
   }
 
   togglePwdVisibility = () => {
