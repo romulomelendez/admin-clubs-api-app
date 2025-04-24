@@ -36,6 +36,8 @@ export class LoginTabComponent implements OnInit {
   ngOnInit() {
     if(this.authService.isLoggedIn())
       this.router.navigate(['admin/dashboard'])
+    
+    return
   }
 
   async handleLogin() {

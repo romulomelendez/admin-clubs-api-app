@@ -5,6 +5,7 @@ import { PageNoteFoundComponent } from './components/page-note-found/page-note-f
 import { AuthGuard } from './guards/auth.guard'
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'admin', pathMatch: 'full' },
     { path: 'admin', component: HomeComponent },
     { path: 'admin/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: '**', component: PageNoteFoundComponent }
