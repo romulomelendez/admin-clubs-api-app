@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { FormValidationService } from '../../shared/validation/form-validation.service'
 import { ApiRequestService } from '../../shared/http/api-request.service'
-import { LocalStorageTokenService } from '../../shared/auth/local-storage-token.service'
 import { MatIconModule } from '@angular/material/icon'
 import { Router } from '@angular/router'
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login-tab',
@@ -26,12 +26,12 @@ export class LoginTabComponent {
     ])
   })
 
+  private readonly router = inject(Router)
   passwordVisibilityStatus = false
   passwordInputType = "password"
   validateService = inject(FormValidationService)
   apiService = inject(ApiRequestService)
-  localStorageService = inject(LocalStorageTokenService)
-  private readonly router = inject(Router)
+  authService = inject(AuthService)
 
   handleLogin = async () => {
     
@@ -50,7 +50,7 @@ export class LoginTabComponent {
       }
     )
 
-    this.localStorageService.setToken(token)
+    this.authService.saveToken(token)
     this.router.navigate(['admin/dashboard'])
   }
 
