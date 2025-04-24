@@ -1,8 +1,10 @@
 <div class="flex flex-col w-full h-full bg-indigo-900 rounded-xl">
     <app-tab-menu />
-    @if (tabSelected() === "login") {
-        <app-login-tab />
-    } @else {
-        <app-register-tab />
-    }
+    <div class="flex justify-center items-center w-full h-full bg-indigo-900 rounded-xl">
+        @if (tabSelected() === "login") {
+            <app-login-tab />
+        } @else {
+            <app-register-tab />
+        }
+    </div>
 </div>
