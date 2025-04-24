@@ -38,7 +38,7 @@ export class LoginTabComponent implements OnInit {
       this.router.navigate(['admin/dashboard'])
   }
 
-  handleLogin = async () => {
+  async handleLogin() {
     
     if(!this.validateService.isValid(this.loginForm))
       return
@@ -59,7 +59,7 @@ export class LoginTabComponent implements OnInit {
     this.router.navigate(['admin/dashboard'])
   }
 
-  togglePwdVisibility = () => {
+  togglePwdVisibility () {
     if (this.passwordInputType === 'password') {
       this.passwordInputType = 'text'
       this.passwordVisibilityStatus = true
