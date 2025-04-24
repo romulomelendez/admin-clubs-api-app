@@ -4,16 +4,16 @@
           formControlName="username"
           type="text"
           placeholder="Username"
-          class="text-2xl bg-indigo-950 rounded-xl w-[90%] p-3 text-indigo-800 outline-none"
+          class="text-2xl bg-indigo-950 rounded-xl w-[90%] p-3 text-slate-100 placeholder-indigo-800 outline-none"
         />
         <div class="flex items-center justify-between bg-indigo-950 rounded-xl w-[90%] p-3">
             <input
               formControlName="password"
               [type]="passwordInputType"
               placeholder="Password"
-              class="text-2xl w-full text-indigo-800 outline-none"
+              class="text-2xl w-full text-slate-100 placeholder-indigo-800 outline-none"
             />
-            <button type="button" class="w-max h-max text-white cursor-pointer" (click)="togglePwdVisibility()">
+            <button type="button" class="flex justify-center w-max h-max text-white cursor-pointer outline-none" (click)="togglePwdVisibility()">
                 @if(!passwordVisibilityStatus){
                     <mat-icon>
                         visibility_off
