@@ -14,7 +14,7 @@ export class AuthService {
     localStorage.setItem(this.tokenKey, token)
   }
 
-  logout() {
+  clearToken() {
     localStorage.removeItem(this.tokenKey)
   }
 }
