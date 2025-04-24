@@ -1,13 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { FormValidationService } from '../../shared/validation/form-validation.service'
 import { ApiRequestService } from '../../shared/http/api-request.service'
-import { LocalStorageTokenService } from '../../shared/auth/local-storage-token.service';
+import { LocalStorageTokenService } from '../../shared/auth/local-storage-token.service'
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-login-tab',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatIconModule],
   templateUrl: './login-tab.component.html'
 })
 
@@ -24,6 +25,8 @@ export class LoginTabComponent {
     ])
   })
 
+  passwordVisibilityStatus = false
+  passwordInputType = "password"
   validateService = inject(FormValidationService)
   apiService = inject(ApiRequestService)
   localStorageService = inject(LocalStorageTokenService)
@@ -46,5 +49,17 @@ export class LoginTabComponent {
     )
 
     this.localStorageService.setToken(token)
+  }
+
+  togglePwdVisibility = () => {
+    if (this.passwordInputType === 'password') {
+      this.passwordInputType = 'text'
+      this.passwordVisibilityStatus = true
+      return
+    }
+
+    this.passwordInputType = 'password'
+    this.passwordVisibilityStatus = false
+    return
   }
 }
