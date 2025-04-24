@@ -15,7 +15,7 @@ export class DashboardComponent {
     private router: Router
   ) {}
 
-  logout() {
+  logout(): void {
     this.authService.clearToken()
     this.router.navigate(['admin'])
   }

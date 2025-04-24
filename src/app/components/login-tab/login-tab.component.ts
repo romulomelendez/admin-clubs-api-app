@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { FormValidationService } from '../../shared/validation/form-validation.service'
 import { ApiRequestService } from '../../shared/http/api-request.service'
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './login-tab.component.html'
 })
 
-export class LoginTabComponent {
+export class LoginTabComponent implements OnInit {
 
   loginForm = new FormGroup({
     username: new FormControl('', [
@@ -32,6 +32,11 @@ export class LoginTabComponent {
   validateService = inject(FormValidationService)
   apiService = inject(ApiRequestService)
   authService = inject(AuthService)
+
+  ngOnInit() {
+    if(this.authService.isLoggedIn())
+      this.router.navigate(['admin/dashboard'])
+  }
 
   handleLogin = async () => {
     
